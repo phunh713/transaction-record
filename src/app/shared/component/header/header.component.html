@@ -1,0 +1,9 @@
+<mat-toolbar id="header">
+    <div class="header-wrapper">
+        <a routerLink="/" *ngIf="isLogin">Overview</a>
+        <a routerLink="/add" *ngIf="isLogin" (click)="onNavToAdd()">Add</a>
+        <a routerLink="/transactions" *ngIf="isLogin">Transactions</a>
+        <a *ngIf="isLogin" (click)="onLogout()">Logout</a>
+        <a routerLink="/auth" *ngIf="!isLogin">Auth</a>
+    </div>
+</mat-toolbar>

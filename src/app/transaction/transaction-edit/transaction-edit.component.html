@@ -1,0 +1,44 @@
+<mat-card class="form-wrapper">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" #myForm="ngForm" class="edit-form">
+        <label [ngClass]="{'my-invalid': form.get('type').invalid && myForm.submitted}">Type of Transaction * </label>
+        <mat-radio-group class="radio-group" aria-label="Select an option" formControlName="type" (change)="onFocusRadioBtn($event.value)" required>
+            <mat-radio-button value="income">Income</mat-radio-button>
+            <mat-radio-button value="expense">Expense</mat-radio-button>
+            <mat-error style="font-size: 75%; margin-top: 10px" *ngIf="form.get('type').invalid && myForm.submitted">this field is required</mat-error>
+        </mat-radio-group>
+
+        <mat-form-field class="edit-form-field" style="margin-top: 10px">
+            <mat-label>Categories</mat-label>
+            <mat-select required formControlName="categories">
+                <mat-option *ngFor="let category of categories" [value]="category">
+                    {{ category | titlecase }}
+                </mat-option>
+            </mat-select>
+            <mat-hint *ngIf="form.get('type').invalid">Please select Type of Transaction first</mat-hint>
+            <mat-error>this field is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="edit-form-field">
+            <mat-label>Amount</mat-label>
+            <input matInput formControlName="amount" required type="number" />
+            <mat-error>this field is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="edit-form-field">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" required />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>this field is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="edit-form-field">
+            <mat-label>Note</mat-label>
+            <input matInput formControlName="note" />
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button color="primary" type="submit" *ngIf="!editId">{{inputTheSame ? "Cancel" : "Add"}}</button><button type="submit" mat-raised-button color="primary" type="submit" *ngIf="editId">{{ inputTheSame ? "Cancel" : "Update" }}</button>
+        <button style="margin-left: 10px" mat-raised-button color="warn" type="button" *ngIf="editId" (click)="onDelete()">Delete</button>
+    </form>
+</mat-card>
+<app-spinner [isLoading]="isLoading"></app-spinner>

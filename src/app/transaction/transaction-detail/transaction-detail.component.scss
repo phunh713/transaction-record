@@ -1,0 +1,35 @@
+.transaction-detail-wrapper {
+    display: flex;
+    margin-top: 9px;
+    align-items: center;
+
+    span {
+        font-size: 12px;
+    }
+
+    span:first-child {
+        width: 20%;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+    }
+
+    span:nth-child(2) {
+        width: 30%;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        padding-left: 9px;
+    }
+
+    span:nth-child(3),
+    span:nth-child(4) {
+        width: 25%;
+        text-align: right;
+    }
+
+    span:nth-child(3) {
+        color: #1976d2;
+    }
+    span:nth-child(4) {
+        color: #e23237;
+    }
+}

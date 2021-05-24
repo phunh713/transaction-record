@@ -1,0 +1,19 @@
+.auth-container {
+    position: relative;
+
+    .auth-form {
+        max-width: 350px;
+        margin: 30px auto;
+
+        .auth-form-field {
+            width: 100%;
+        }
+    }
+
+    .auth-toggle {
+        justify-content: center;
+        width: 100%;
+    }
+
+    
+}

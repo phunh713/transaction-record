@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #f3f3f3;
+}
+p {
+    margin: 0;
+}
+.cdk-overlay-container {
+    height: calc(100% - 40px);
+}
+
+//Expansion Pannel Global Style
+.mat-expansion-panel-header,
+.mat-expansion-panel-body {
+    padding: 9px 12px !important;
+    height: auto !important;
+}
+
+.mat-expansion-panel-spacing {
+    margin: 7px 0 !important;
+}
+
+//Mat-Pagination global style
+.mat-paginator-range-label {
+    margin: 0 15px !important;
+}

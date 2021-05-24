@@ -1,0 +1,41 @@
+<mat-grid-list cols="2" rowHeight="1:1" gutterSize="10">
+    <mat-card style="margin-bottom: 10px">
+        <div>
+            <mat-form-field appearance="standard">
+                <mat-label>Year</mat-label>
+                <mat-select [value]="yearsList[0]" (selectionChange)="onSelectYear($event)">
+                    <mat-option [value]="year" *ngFor="let year of yearsList">{{ year }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </mat-card>
+
+    <mat-grid-tile rowspan="2" >
+        <div class="chart-container" >
+            <span class="chart-title"><strong>Total Income: </strong>{{ totalIncome | number }} VND</span>
+
+            <div class="chart-wrapper">
+                <canvas id="incomeDoughnutChart" width="100" height="auto"></canvas>
+            </div>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile rowspan="2" >
+        <div class="chart-container" style="text-align: center; width: 100%; height: 100%">
+            <span class="chart-title"><strong>Total Expense: </strong>{{ totalExpense | number }} VND</span>
+
+            <div class="chart-wrapper">
+                <canvas id="expenseDoughnutChart" width="100" height="170"></canvas>
+            </div>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="2" rowspan="2">
+        <div class="chart-container">
+            <span class="chart-title"><strong>Transaction by Months</strong></span>
+            <div class="chart-wrapper">
+                <canvas id="barChart" #barChart width="6" height="5"></canvas>
+            </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,22 @@
+<div class="auth-container">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" class="auth-toggle">
+        <mat-button-toggle value="bold" [checked]="true" (click)="isLogin = true">Log In</mat-button-toggle>
+        <mat-button-toggle value="italic" (click)="isLogin = false">Sign Up</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" #authForm="ngForm">
+        <mat-form-field class="auth-form-field">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required type="email" />
+        </mat-form-field>
+
+        <mat-form-field class="auth-form-field">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" required type="password" minlength="6" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">{{ isLogin ? "Log In" : "Sign Up" }}</button>
+    </form>
+</div>
+
+<app-spinner [isLoading]="isLoading"></app-spinner>

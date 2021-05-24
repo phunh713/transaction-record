@@ -1,0 +1,12 @@
+<div
+    class="transaction-detail-wrapper"
+    cols="4"
+    (click)="onSelect()"
+    rowHeight="2:1"
+    [ngClass]="{ income: transaction.type === 'income', expense: transaction.type === 'expense' }"
+>
+    <span> {{ transaction.category | titlecase}}</span>
+    <span>{{ transaction.note }}</span>
+    <span>{{ transaction.type === "income" ? (transaction.amount | number) : "" }}</span>
+    <span>{{ transaction.type === "expense" ? (transaction.amount | number) : "" }}</span>
+</div>

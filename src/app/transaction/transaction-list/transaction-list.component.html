@@ -1,0 +1,52 @@
+<div class="transaction-list-wrapper">
+    <div class="datepicker-wrapper">
+        <mat-form-field appearance="standard" floatLabel="always">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" #datepicker (click)="picker.open()">
+                <input matStartDate placeholder="Start date" [value]="fromDate" />
+                <input matEndDate placeholder="End date" [value]="toDate" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker disabled="false" #picker (closed)="onDatePick(datepicker.value)"></mat-date-range-picker>
+        </mat-form-field>
+        <button mat-raised-button (click)="onClearDate()">Clear</button>
+    </div>
+
+    <mat-button-toggle-group (change)="onChangeType($event.value)">
+        <mat-button-toggle [value]="null" checked>Both</mat-button-toggle>
+        <mat-button-toggle value="income">income</mat-button-toggle>
+        <mat-button-toggle value="expense">expense</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-accordion multi>
+        <mat-expansion-panel hideToggle expanded *ngFor="let date of uniqueDate | pagination: pageIndex:pageSize">
+            <mat-expansion-panel-header>
+                <mat-panel-title> {{ date | date: "dd/MM/yyyy" }} </mat-panel-title>
+                <mat-panel-description class="overview-wrapper">
+                    <div class="overview-detail income">
+                        <span>Income</span>
+                        <span [ngClass]="{ hidden: filterType === 'expense' }">{{ getIncomeByDate(date) | currency: "VND" }}</span>
+                    </div>
+                    <div class="overview-detail expense">
+                        <span>Expense</span>
+                        <span [ngClass]="{ hidden: filterType === 'income' }">{{ getExpenseByDate(date) | currency: "VND" }}</span>
+                    </div>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-divider></mat-divider>
+            <app-transaction-detail
+                [transaction]="transaction"
+                *ngFor="let transaction of transactions | filterTransaction: date:filterType"
+            ></app-transaction-detail>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-paginator
+        (page)="onPagEvent($event)"
+        [length]="uniqueDate.length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[5, 10]"
+        [pageIndex]="pageIndex"
+    >
+    </mat-paginator>
+</div>
